@@ -5,3 +5,131 @@
 
   font-family: "Roboto", sans-serif;
 }
+
+/* NavBar */
+
+.navBar-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+.navBar-container-icon {
+  padding: 0px 20px;
+  /* border: 1px solid white; */
+  transition: all 500ms ease;
+}
+.navBar-container-icon:hover {
+  background: white;
+  color: rgb(173, 20, 87);
+  /* box-shadow: inset 0 0 0 3px #3a7999; */
+}
+
+/* PopUp */
+
+.b-container {
+  width: 200px;
+  height: 150px;
+  background-color: #ccc;
+  margin: 0px auto;
+  padding: 10px;
+  font-size: 30px;
+  color: #fff;
+}
+.b-popup {
+  width: 100%;
+  min-height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  position: fixed;
+  top: 0px;
+}
+.b-popup .b-popup-content {
+  max-width: 550px;
+
+  margin: 5%;
+  padding: 10px;
+
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px #000;
+}
+
+/* PopUp - User */
+.popup-userName-null {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  color: rgb(173, 20, 87);
+}
+.popup-userName-line {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding: 5px;
+
+  border-bottom: 1px solid black;
+}
+
+.popup-userName-line-userName {
+  width: 80%;
+  padding: 0px 15px;
+}
+.popup-userName-line-icons {
+  width: 10%;
+  cursor: pointer;
+}
+
+.popup-userName-line-add {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px;
+
+  color: black;
+  border-top: 2px solid rgb(173, 20, 87);
+}
+.popup-userName-line-add input {
+  width: 65%;
+  padding: 0px 15px;
+}
+
+::placeholder {
+  color: black;
+  font-size: 1em;
+  opacity: 0.5;
+}
+
+.cursor div {
+  cursor: pointer;
+}
+i {
+  cursor: pointer;
+}
+
+/* PopUp - Product */
+
+.popup-product-Addline-name {
+  width: 60%;
+}
+.popup-product-Addline-price {
+  width: 20%;
+}
+
+.popup-userName-Addline-add input {
+  text-align: center;
+}
