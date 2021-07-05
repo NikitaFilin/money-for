@@ -88,6 +88,10 @@ const App = () => {
           setPopUpViewProducts={setPopUpViewProducts}
         />
       ) : null}
+
+      <div>
+        <h2>calculation block</h2>
+      </div>
     </>
   );
 };
