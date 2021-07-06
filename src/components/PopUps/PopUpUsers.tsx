@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "../../index.css";
 
-export const PopUpUsers: React.FC<any> = ({
+import { IUserProps, IPopUpUsersProps } from "../../types/types";
+
+export const PopUpUsers: React.FC<IPopUpUsersProps> = ({
   users,
   handleAddUser,
   handleRemoveUser,
@@ -42,7 +44,7 @@ export const PopUpUsers: React.FC<any> = ({
           {
             <ul>
               {users.length > 0 ? (
-                users.map((user: any) => {
+                users.map((user: IUserProps) => {
                   return (
                     <li key={user.id}>
                       <div className="popup-userName-line">

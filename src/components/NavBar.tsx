@@ -1,6 +1,13 @@
 import React from "react";
 
-export const NavBar: React.FC<any> = ({
+interface INavBar {
+  popUpViewUsers: boolean;
+  setPopUpViewUsers: (popUpViewUsers: boolean) => void;
+  popUpViewProducts: boolean;
+  setPopUpViewProducts: (popUpViewProducts: boolean) => void;
+}
+
+export const NavBar: React.FC<INavBar> = ({
   popUpViewUsers,
   setPopUpViewUsers,
   popUpViewProducts,

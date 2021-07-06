@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "../../index.css";
 
-export const PopUpProducts: React.FC<any> = ({
+import { IProductProps, IPopUpProductsProps } from "../../types/types";
+
+export const PopUpProducts: React.FC<IPopUpProductsProps> = ({
   products,
   handleAddProduct,
   handleRemoveProduct,
@@ -47,7 +49,7 @@ export const PopUpProducts: React.FC<any> = ({
                   </div>
                 </div>
               </li>
-              {products.map((product: any) => {
+              {products.map((product: IProductProps) => {
                 return (
                   <li key={product.id}>
                     <div className="popup-userName-line-add">

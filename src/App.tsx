@@ -4,25 +4,16 @@ import { PopUpUsers } from "./components/PopUps/PopUpUsers";
 import { PopUpProducts } from "./components/PopUps/PopUpProducts";
 import "./index.css";
 
-type IUserProps = {
-  id: number;
-  name: string;
-  checked: boolean;
-};
-type IProductsProps = {
-  id: number;
-  name: string;
-  price: number;
-};
+import { IUserProps, IProductProps } from "./types/types";
 
 const App = () => {
-  const [users, setUsers] = useState<Array<IUserProps>>([
+  const [users, setUsers] = useState<IUserProps[]>([
     { id: 1, name: "Никита", checked: true },
     { id: 2, name: "Олег", checked: false },
     { id: 3, name: "Алина", checked: true },
   ]);
 
-  const [products, setProducts] = useState<Array<IProductsProps>>([
+  const [products, setProducts] = useState<IProductProps[]>([
     {
       id: 1,
       name: "Хлеб",
@@ -44,7 +35,7 @@ const App = () => {
   const [popUpViewUsers, setPopUpViewUsers] = useState<boolean>(false);
   const [popUpViewProducts, setPopUpViewProducts] = useState<boolean>(false);
 
-  // добавление нового участника
+  // добавление/удаление нового участника
   const handleAddUser = (userObj: IUserProps) => {
     setUsers([...users, userObj]);
   };
@@ -52,13 +43,12 @@ const App = () => {
   const handleRemoveUser = (id: number) => {
     setUsers(users.filter((el) => el.id !== id));
   };
-  // добавление продуктов
-  const handleAddProduct = (productObj: IProductsProps) => {
+  // добавление/удаление продуктов
+  const handleAddProduct = (productObj: IProductProps) => {
     console.log("handleAddProduct");
 
     setProducts([...products, productObj]);
   };
-
   const handleRemoveProduct = (id: number) => {
     setProducts(products.filter((el) => el.id !== id));
   };
@@ -66,7 +56,6 @@ const App = () => {
   return (
     <>
       <NavBar
-        handleAdd={handleAddUser}
         popUpViewUsers={popUpViewUsers}
         setPopUpViewUsers={setPopUpViewUsers}
         popUpViewProducts={popUpViewProducts}
