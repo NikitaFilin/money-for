@@ -1,13 +1,13 @@
 import React from "react";
-import { IProductProps } from "../../types/types";
+import { IProduct } from "../../types/types";
 
 import "../../styles/userCard.css";
 
-interface IProductCardProps {
-  products: IProductProps[];
+interface IProductCard {
+  products: IProduct[];
 }
 
-export const ProductCard: React.FC<IProductCardProps> = ({ products }): any => {
+export const ProductCard: React.FC<IProductCard> = ({ products }): any => {
   return (
     <>
       <div className="product-card-container">

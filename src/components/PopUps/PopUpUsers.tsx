@@ -50,17 +50,13 @@ export const PopUpUsers: React.FC<IPopUpUsersProps> = ({
                     <li key={user.id}>
                       <div className="popup-userName-line">
                         <div className="popup-userName-line-icons">
-                          <label>
-                            <input
-                              type="checkbox"
-                              checked={user.checked}
-                              onChange={() => handleCheckedUser(user.id)}
-                            />
-                            <span></span>
-                          </label>
+                          <input
+                            type="checkbox"
+                            checked={user.checked}
+                            onChange={() => handleCheckedUser(user.id)}
+                          />
                         </div>
                         <div className="popup-userName-line-userName">
-                          {" "}
                           {user.name}
                         </div>
                         <div className="popup-userName-line-icons">

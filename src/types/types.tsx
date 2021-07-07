@@ -1,33 +1,40 @@
-export interface IUserProps {
+export interface IUser {
   id: number;
   name: string;
   checked: boolean;
-  products?: [];
+  userProducts: IUserProducts[];
+  productCosts: number[];
 }
-export interface IProductProps {
+export interface IProduct {
   id: number;
   name: string;
   price: number;
 }
+export interface IUserProducts {
+  productId: number;
+  name: string;
+  count: number;
+  checked: boolean;
+}
 
 export interface IPopUpUsersProps {
-  users: IUserProps[];
-  handleAddUser: (props: IUserProps) => void;
+  users: IUser[];
+  handleAddUser: (props: IUser) => void;
   handleRemoveUser: (id: number) => void;
   setPopUpView: (popUpView: boolean) => void;
   handleCheckedUser: (props: any) => void;
 }
 
 export interface IPopUpProductsProps {
-  products: IProductProps[];
-  handleAddProduct: (products: IProductProps) => void;
+  products: IProduct[];
+  handleAddProduct: (products: IProduct) => void;
   handleRemoveProduct: (id: number) => void;
   setPopUpViewProducts: (popUpViewProducts: boolean) => void;
 }
 
 export interface IMoneyCount {
-  users?: IUserProps[];
-  products?: IProductProps[];
+  users?: IUser[];
+  products?: IProduct[];
 }
 
 // let moneyState = [
