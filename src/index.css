@@ -35,6 +35,7 @@
   padding: 10px;
   font-size: 30px;
   color: #fff;
+  z-index: 1;
 }
 .b-popup {
   width: 100%;
@@ -53,7 +54,7 @@
 .b-popup .b-popup-content {
   max-width: 550px;
 
-  margin: 5%;
+  margin: 2%;
   padding: 10px;
 
   background-color: white;
