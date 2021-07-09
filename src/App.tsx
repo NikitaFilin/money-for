@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { NavBar } from "./components/NavBar";
 import { PopUpUsers } from "./components/PopUps/PopUpUsers";
 import { PopUpProducts } from "./components/PopUps/PopUpProducts";
@@ -9,6 +9,17 @@ import { IUser, IProduct } from "./types/types";
 
 const App = () => {
   const [users, setUsers] = useState<IUser[]>([
+    {
+      id: 3,
+      name: "Олег",
+      checked: true,
+      userProducts: [
+        { productId: 1, name: "Хлеб", price: 100, checked: false },
+        { productId: 2, name: "Молоко", price: 120, checked: false },
+        { productId: 3, name: "Яйцо", price: 300, checked: false },
+      ],
+      productCosts: [],
+    },
     {
       id: 4,
       name: "Наташа",
@@ -52,12 +63,6 @@ const App = () => {
 
   // добавление/удаление нового участника
   const handleAddUser = (userObj: IUser) => {
-    console.log("userObj", userObj);
-    //checked: false
-    // id: 1625827569192
-    // name: "C"
-    // productCosts: []
-    // userProducts: []
     console.log("prod", [...products]);
     setUsers([
       ...users,
@@ -120,9 +125,33 @@ const App = () => {
       })
     );
   };
-  const handleUserProducts = (id: number) => {
-    console.log(id);
+  const handleUserProducts = (userId: number, index: number) => {
+    console.log(userId, index);
+
+    setUsers((prev) => {
+      return prev.map((user) => {
+        if (user.id === userId) {
+          user.userProducts.map((product, i) => {
+            if (index === i) {
+              product.checked = !product.checked;
+            }
+            return product;
+          });
+        }
+
+        return user;
+      });
+    });
   };
+
+  // return users.map((user) => {
+  //   //Ищем пользователя по id
+  //   if (user.id === userId) {
+  //     user.userProducts[index].checked = !user.userProducts[index].checked;
+  //   }
+
+  //   return user;
+  // });
 
   return (
     <>
@@ -157,5 +186,4 @@ const App = () => {
     </>
   );
 };
-
 export default App;
