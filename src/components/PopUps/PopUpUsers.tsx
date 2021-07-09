@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../index.css";
 
-import { IUserProps, IPopUpUsersProps } from "../../types/types";
+import { IUser, IPopUpUsersProps } from "../../types/types";
 
 export const PopUpUsers: React.FC<IPopUpUsersProps> = ({
   users,
@@ -21,10 +21,12 @@ export const PopUpUsers: React.FC<IPopUpUsersProps> = ({
       setNewUser(newUser.trim());
       const styledUser = newUser[0].toUpperCase() + newUser.slice(1);
 
-      const newObj = {
+      const newObj: IUser = {
         id: Date.now(),
         name: styledUser,
         checked: false,
+        userProducts: [],
+        productCosts: [],
       };
 
       handleAddUser(newObj);
@@ -45,7 +47,7 @@ export const PopUpUsers: React.FC<IPopUpUsersProps> = ({
           {
             <ul>
               {users.length > 0 ? (
-                users.map((user: IUserProps) => {
+                users.map((user: IUser) => {
                   return (
                     <li key={user.id}>
                       <div className="popup-userName-line">

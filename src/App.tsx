@@ -7,78 +7,16 @@ import "./index.css";
 
 import { IUser, IProduct } from "./types/types";
 
-// let moneyState = [
-//   {
-//     id: 1,
-//     name: "Никита",
-//     checked: true,
-//     products: [
-//       {
-//         productId: 2,
-//         checked: false,
-//         count: 0
-//       }
-//      ],
-//     productCosts: [0, 100],
-//   },
-//   {
-//     id: 1,
-//     name: "Никита",
-//     checked: true,
-//     products: [
-//       {
-//         productId: 3,
-//         checked: false,
-//         count: 0
-//       }
-//      ],
-//     productCosts: [0, 100],
-//   },
-// ];
-
 const App = () => {
   const [users, setUsers] = useState<IUser[]>([
-    {
-      id: 1,
-      name: "Никита",
-      checked: true,
-      userProducts: [
-        { productId: 1, name: "Хлеб", count: 0, checked: false },
-        { productId: 2, name: "Молоко", count: 0, checked: false },
-        { productId: 3, name: "Яйца", count: 0, checked: false },
-      ],
-      productCosts: [8, 612],
-    },
-    {
-      id: 2,
-      name: "Олег",
-      checked: true,
-      userProducts: [
-        { productId: 1, name: "Хлеб", count: 0, checked: false },
-        { productId: 2, name: "Молоко", count: 0, checked: false },
-        { productId: 3, name: "Яйца", count: 0, checked: false },
-      ],
-      productCosts: [19],
-    },
-    {
-      id: 3,
-      name: "Алина",
-      checked: true,
-      userProducts: [
-        { productId: 1, name: "Хлеб", count: 0, checked: false },
-        { productId: 2, name: "Молоко", count: 0, checked: false },
-        { productId: 3, name: "Яйца", count: 0, checked: false },
-      ],
-      productCosts: [],
-    },
     {
       id: 4,
       name: "Наташа",
       checked: true,
       userProducts: [
-        // { 1: [{ name: "Хлеб" }, { count: 0 }, { checked: false }] },
-        { productId: 2, name: "Молоко", count: 0, checked: false },
-        { productId: 3, name: "Яйца", count: 0, checked: false },
+        { productId: 1, name: "Хлеб", price: 100, checked: false },
+        { productId: 2, name: "Молоко", price: 120, checked: false },
+        { productId: 3, name: "Яйцо", price: 300, checked: false },
       ],
       productCosts: [],
     },
@@ -86,19 +24,25 @@ const App = () => {
 
   const [products, setProducts] = useState<IProduct[]>([
     {
-      id: 1,
+      productId: 1,
       name: "Хлеб",
       price: 54,
+      checked: false,
+      userSelected: [],
     },
     {
-      id: 2,
+      productId: 2,
       name: "Молоко",
       price: 69,
+      checked: false,
+      userSelected: [],
     },
     {
-      id: 3,
+      productId: 3,
       name: "Яйца",
       price: 70,
+      checked: false,
+      userSelected: [],
     },
   ]);
 
@@ -108,7 +52,23 @@ const App = () => {
 
   // добавление/удаление нового участника
   const handleAddUser = (userObj: IUser) => {
-    setUsers([...users, userObj]);
+    console.log("userObj", userObj);
+    //checked: false
+    // id: 1625827569192
+    // name: "C"
+    // productCosts: []
+    // userProducts: []
+    console.log("prod", [...products]);
+    setUsers([
+      ...users,
+      {
+        id: userObj.id,
+        name: userObj.name,
+        checked: false,
+        userProducts: [...products],
+        productCosts: [],
+      },
+    ]);
   };
 
   const handleRemoveUser = (id: number) => {
@@ -125,9 +85,9 @@ const App = () => {
         userProducts: [
           ...el.userProducts,
           {
-            productId: productObj.id,
+            productId: productObj.productId,
             name: productObj.name,
-            count: 0,
+            price: productObj.price,
             checked: false,
           },
         ],
@@ -136,7 +96,7 @@ const App = () => {
   };
 
   const handleRemoveProduct = (id: number) => {
-    setProducts(products.filter((el) => el.id !== id));
+    setProducts(products.filter((el) => el.productId !== id));
     //удаление продукта у Юзеров
     console.log(id);
 

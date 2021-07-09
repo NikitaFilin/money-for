@@ -6,14 +6,16 @@ export interface IUser {
   productCosts: number[];
 }
 export interface IProduct {
-  id: number;
+  productId: number;
   name: string;
   price: number;
+  checked: boolean;
+  userSelected: string[];
 }
 export interface IUserProducts {
   productId: number;
   name: string;
-  count: number;
+  price: number;
   checked: boolean;
 }
 

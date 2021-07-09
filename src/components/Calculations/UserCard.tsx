@@ -22,9 +22,9 @@ export const UserCard: React.FC<IUserCard> = ({
           <div className="user-card-container" key={user.id}>
             <span className="user-card-container-header">{user.name}</span>
             <div className="user-card-line">
-              {products.map((product) => {
+              {user.userProducts?.map((product) => {
                 return (
-                  <div className="user-card" key={product.id}>
+                  <div className="user-card" key={product.productId}>
                     <div>
                       <input
                         type="checkbox"
@@ -36,17 +36,6 @@ export const UserCard: React.FC<IUserCard> = ({
                         //   ].checked
                         // }
                         onChange={() => handleUserProducts(user.id)}
-                        /* {
-                  id: 1,
-                  name: "Никита",
-                  checked: true,
-                  userProducts: [
-                     1 :{ name: "Хлеб", count: 0, checked: false },
-                    { productId: 2, name: "Молоко", count: 0, checked: false },
-                    { productId: 3, name: "Яйца", count: 0, checked: false },
-                  ],
-                  productCosts: [8, 612],
-                }, */
                       />
                     </div>
                     <div>{product.name}</div>

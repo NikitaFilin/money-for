@@ -1,7 +1,34 @@
 import React, { useState } from "react";
 import "../../index.css";
 
-import { IProductProps, IPopUpProductsProps } from "../../types/types";
+import { IPopUpProductsProps, IProduct } from "../../types/types";
+
+// Структура
+// "users": [
+//   {
+//     "id": 4,
+//     "name": "Наташа",
+//     "checked": true,
+//     "userProducts": [
+//       "{checked: false, name: \"Кишмиш\", price: 244, produc…}"
+//     ],
+//     "productCosts": []
+//   },
+//   {
+//     "id": 1625828201163,
+//     "name": "Ваня",
+//     "checked": true,
+//     "userProducts": "[{…}, {…}]",
+//     "productCosts": "[]"
+//   },
+//   {
+//     "id": 1625828231585,
+//     "name": "Никта",
+//     "checked": true,
+//     "userProducts": "[{…}, {…}]",
+//     "productCosts": "[]"
+//   }
+// ],
 
 export const PopUpProducts: React.FC<IPopUpProductsProps> = ({
   products,
@@ -23,11 +50,14 @@ export const PopUpProducts: React.FC<IPopUpProductsProps> = ({
       setNewProduct(newProduct.trim());
       const styledProduct = newProduct[0].toUpperCase() + newProduct.slice(1);
 
-      const newObj = {
-        id: Date.now(),
+      const newObj: IProduct = {
+        productId: Date.now(),
         name: styledProduct,
         price: newPrice,
+        checked: false,
+        userSelected: [],
       };
+
       handleAddProduct(newObj);
       setNewProduct("");
       setNewPrice(0);
@@ -49,9 +79,9 @@ export const PopUpProducts: React.FC<IPopUpProductsProps> = ({
                   </div>
                 </div>
               </li>
-              {products.map((product: IProductProps) => {
+              {products.map((product: IProduct) => {
                 return (
-                  <li key={product.id}>
+                  <li key={product.productId}>
                     <div className="popup-userName-line-add">
                       <div className="popup-product-Addline-name">
                         {product.name}
@@ -62,7 +92,7 @@ export const PopUpProducts: React.FC<IPopUpProductsProps> = ({
                       <div className="product-line">
                         <i
                           className="material-icons right"
-                          onClick={() => handleRemoveProduct(product.id)}
+                          onClick={() => handleRemoveProduct(product.productId)}
                         >
                           delete_forever
                         </i>
