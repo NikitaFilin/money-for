@@ -15,7 +15,7 @@ export const ProductCard: React.FC<IProductCard> = ({ products }): any => {
         <div className="product-card-line">
           {products.map((product) => {
             return (
-              <div className="product-card" key={product.id}>
+              <div className="product-card" key={product.productId}>
                 <div>{product.name}</div>
                 <div>{product.price}</div>
               </div>

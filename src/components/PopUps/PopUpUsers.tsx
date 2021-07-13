@@ -26,7 +26,7 @@ export const PopUpUsers: React.FC<IPopUpUsersProps> = ({
         name: styledUser,
         checked: false,
         userProducts: [],
-        productCosts: [],
+        productSelected: [],
       };
 
       handleAddUser(newObj);

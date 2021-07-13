@@ -3,7 +3,7 @@ export interface IUser {
   name: string;
   checked: boolean;
   userProducts: IUserProducts[];
-  productCosts: number[];
+  productSelected: string[];
 }
 export interface IProduct {
   productId: number;
@@ -17,6 +17,16 @@ export interface IUserProducts {
   name: string;
   price: number;
   checked: boolean;
+}
+
+export interface IMoneyManager {
+  [id: number]: IMoneyManagerProps;
+}
+
+export interface IMoneyManagerProps {
+  cost: number;
+  userSelected: number[];
+  personCost: number;
 }
 
 export interface IPopUpUsersProps {

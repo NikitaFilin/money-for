@@ -3,12 +3,12 @@ import "../../styles/calculationBlock.css";
 
 import { IUser, IProduct } from "../../types/types";
 import { UserCard } from "../Calculations/UserCard";
-import { ProductCard } from "../Calculations/ProductCard";
+// import { ProductCard } from "../Calculations/ProductCard";
 
 interface ICalculationBlock {
   users: IUser[];
   products: IProduct[];
-  handleUserProducts: (id: number) => void;
+  handleUserProducts: (id: number, productId: number, index: number) => void;
 }
 
 export const CalculationBlock: React.FC<ICalculationBlock> = ({

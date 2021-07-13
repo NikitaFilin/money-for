@@ -3,33 +3,6 @@ import "../../index.css";
 
 import { IPopUpProductsProps, IProduct } from "../../types/types";
 
-// Структура
-// "users": [
-//   {
-//     "id": 4,
-//     "name": "Наташа",
-//     "checked": true,
-//     "userProducts": [
-//       "{checked: false, name: \"Кишмиш\", price: 244, produc…}"
-//     ],
-//     "productCosts": []
-//   },
-//   {
-//     "id": 1625828201163,
-//     "name": "Ваня",
-//     "checked": true,
-//     "userProducts": "[{…}, {…}]",
-//     "productCosts": "[]"
-//   },
-//   {
-//     "id": 1625828231585,
-//     "name": "Никта",
-//     "checked": true,
-//     "userProducts": "[{…}, {…}]",
-//     "productCosts": "[]"
-//   }
-// ],
-
 export const PopUpProducts: React.FC<IPopUpProductsProps> = ({
   products,
   handleAddProduct,

@@ -1,55 +1,60 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavBar } from "./components/NavBar";
 import { PopUpUsers } from "./components/PopUps/PopUpUsers";
 import { PopUpProducts } from "./components/PopUps/PopUpProducts";
 import { CalculationBlock } from "./components/Calculations/CalculationBlock";
 import "./index.css";
 
-import { IUser, IProduct } from "./types/types";
+import {
+  IUser,
+  IProduct,
+  IMoneyManager,
+  IMoneyManagerProps,
+} from "./types/types";
 
 const App = () => {
   const [users, setUsers] = useState<IUser[]>([
     {
-      id: 3,
+      id: 1626080975341,
       name: "Олег",
       checked: true,
       userProducts: [
-        { productId: 1, name: "Хлеб", price: 100, checked: false },
-        { productId: 2, name: "Молоко", price: 120, checked: false },
-        { productId: 3, name: "Яйцо", price: 300, checked: false },
+        { productId: 101, name: "Хлеб", price: 100, checked: false },
+        { productId: 202, name: "Молоко", price: 120, checked: false },
+        { productId: 303, name: "Яйцо", price: 300, checked: false },
       ],
-      productCosts: [],
+      productSelected: [],
     },
     {
-      id: 4,
+      id: 1626081159435,
       name: "Наташа",
       checked: true,
       userProducts: [
-        { productId: 1, name: "Хлеб", price: 100, checked: false },
-        { productId: 2, name: "Молоко", price: 120, checked: false },
-        { productId: 3, name: "Яйцо", price: 300, checked: false },
+        { productId: 101, name: "Хлеб", price: 100, checked: false },
+        { productId: 202, name: "Молоко", price: 120, checked: false },
+        { productId: 303, name: "Яйцо", price: 300, checked: false },
       ],
-      productCosts: [],
+      productSelected: [],
     },
   ]);
 
   const [products, setProducts] = useState<IProduct[]>([
     {
-      productId: 1,
+      productId: 101,
       name: "Хлеб",
       price: 54,
       checked: false,
       userSelected: [],
     },
     {
-      productId: 2,
+      productId: 202,
       name: "Молоко",
       price: 69,
       checked: false,
       userSelected: [],
     },
     {
-      productId: 3,
+      productId: 303,
       name: "Яйца",
       price: 70,
       checked: false,
@@ -57,13 +62,19 @@ const App = () => {
     },
   ]);
 
+  const [moneyManager, setMoneyManager] = useState<IMoneyManager>({
+    1626165146992: {
+      cost: 22,
+      userSelected: [767676],
+      personCost: 0,
+    },
+  });
   // открывает/ закрывает PopUp
   const [popUpViewUsers, setPopUpViewUsers] = useState<boolean>(false);
   const [popUpViewProducts, setPopUpViewProducts] = useState<boolean>(false);
 
   // добавление/удаление нового участника
   const handleAddUser = (userObj: IUser) => {
-    console.log("prod", [...products]);
     setUsers([
       ...users,
       {
@@ -71,7 +82,7 @@ const App = () => {
         name: userObj.name,
         checked: false,
         userProducts: [...products],
-        productCosts: [],
+        productSelected: [],
       },
     ]);
   };
@@ -98,21 +109,39 @@ const App = () => {
         ],
       }));
     });
+
+    //Добавляем товар в moneyManager
+    const { productId, price } = productObj;
+    const moneyManagerObj: IMoneyManagerProps = {
+      cost: price,
+      userSelected: [],
+      personCost: 0,
+    };
+
+    setMoneyManager((prev) => {
+      return { ...prev, [productId]: moneyManagerObj };
+    });
   };
 
   const handleRemoveProduct = (id: number) => {
     setProducts(products.filter((el) => el.productId !== id));
-    //удаление продукта у Юзеров
-    console.log(id);
 
+    //удаление продукта у Юзеров
     setUsers((prev) => {
       return prev.map((el: IUser) => ({
         ...el,
         userProducts: [...el.userProducts.filter((x) => x.productId !== id)],
       }));
     });
+
+    //удаление товара из moneyManager
+    setMoneyManager((prev) => {
+      delete prev[id];
+      return { ...prev };
+    });
   };
 
+  // Выбор участника
   const handleCheckedUser = (id: number) => {
     setUsers(
       users.map((user) => {
@@ -125,11 +154,14 @@ const App = () => {
       })
     );
   };
-  const handleUserProducts = (userId: number, index: number) => {
-    console.log(userId, index);
 
-    setUsers((prev) => {
-      return prev.map((user) => {
+  const handleUserProducts = (
+    userId: number,
+    productId: number,
+    index: number
+  ) => {
+    setUsers(
+      users.map((user) => {
         if (user.id === userId) {
           user.userProducts.map((product, i) => {
             if (index === i) {
@@ -138,20 +170,26 @@ const App = () => {
             return product;
           });
         }
-
         return user;
-      });
-    });
+      })
+    );
+    moneyManagerCheck(userId, productId);
   };
 
-  // return users.map((user) => {
-  //   //Ищем пользователя по id
-  //   if (user.id === userId) {
-  //     user.userProducts[index].checked = !user.userProducts[index].checked;
-  //   }
+  const moneyManagerCheck = (userId: number, productId: number) => {
+    // setMoneyManager({
+    //   ...moneyManager,
+    //   [productId]: {
+    //     userSelected: [...userSelected, userId],
+    //   },
+    // });
+  };
 
-  //   return user;
-  // });
+  // 1626165146992: {
+  //   cost: 22,
+  //   userSelected: [],
+  //   personCost: 0,
+  // },
 
   return (
     <>
