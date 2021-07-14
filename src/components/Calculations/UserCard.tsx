@@ -6,7 +6,7 @@ import "../../styles/userCard.css";
 
 interface IUserCard {
   users: IUser[];
-  products: IProduct[];
+  products: IProduct[] | null;
   handleUserProducts: (id: number, productId: number, index: number) => void;
 }
 
@@ -16,32 +16,6 @@ export const UserCard: React.FC<IUserCard> = ({
   handleUserProducts,
 }) => {
   return (
-    // Структура
-    // "users": [
-    //   {
-    //     "id": 4,
-    //     "name": "Наташа",
-    //     "checked": true,
-    //     "userProducts": [
-    //       "{checked: false, name: \"Кишмиш\", price: 244, produc…}"
-    //     ],
-    //     "productCosts": []
-    //   },
-    //   {
-    //     "id": 1625828201163,
-    //     "name": "Ваня",
-    //     "checked": true,
-    //     "userProducts": "[{…}, {…}]",
-    //     "productCosts": "[]"
-    //   },
-    //   {
-    //     "id": 1625828231585,
-    //     "name": "Никта",
-    //     "checked": true,
-    //     "userProducts": "[{…}, {…}]",
-    //     "productCosts": "[]"
-    //   }
-    // ],
     <>
       {users.map((user: IUser) => {
         return user.checked ? (

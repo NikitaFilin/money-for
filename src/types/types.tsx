@@ -5,18 +5,18 @@ export interface IUser {
   userProducts: IUserProducts[];
   productSelected: string[];
 }
+export interface IUserProducts {
+  productId: number;
+  name: string;
+  price: number;
+  checked: boolean;
+}
 export interface IProduct {
   productId: number;
   name: string;
   price: number;
   checked: boolean;
   userSelected: string[];
-}
-export interface IUserProducts {
-  productId: number;
-  name: string;
-  price: number;
-  checked: boolean;
 }
 
 export interface IMoneyManager {
@@ -31,14 +31,14 @@ export interface IMoneyManagerProps {
 
 export interface IPopUpUsersProps {
   users: IUser[];
-  handleAddUser: (props: IUser) => void;
+  handleAddUser: (userId: number, nameFormated: string) => void;
   handleRemoveUser: (id: number) => void;
   setPopUpView: (popUpView: boolean) => void;
   handleCheckedUser: (props: any) => void;
 }
 
 export interface IPopUpProductsProps {
-  products: IProduct[];
+  products: IProduct[] | null;
   handleAddProduct: (products: IProduct) => void;
   handleRemoveProduct: (id: number) => void;
   setPopUpViewProducts: (popUpViewProducts: boolean) => void;

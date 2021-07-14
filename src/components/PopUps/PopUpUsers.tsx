@@ -12,28 +12,26 @@ export const PopUpUsers: React.FC<IPopUpUsersProps> = ({
 }) => {
   const [newUser, setNewUser] = useState("");
 
+  // открываем/ закрываем окошко PopUpUsers
   const clickOutside = (e: React.MouseEvent) => {
     e.target !== e.currentTarget ? setPopUpView(true) : setPopUpView(false);
   };
 
+  // добавляем нового участника
   const handleAddNewUser = () => {
     if (newUser.length > 0) {
       setNewUser(newUser.trim());
-      const styledUser = newUser[0].toUpperCase() + newUser.slice(1);
 
-      const newObj: IUser = {
-        id: Date.now(),
-        name: styledUser,
-        checked: false,
-        userProducts: [],
-        productSelected: [],
-      };
+      const userId = Date.now();
+      const nameFormated =
+        newUser[0].toUpperCase() + newUser.toLowerCase().slice(1);
 
-      handleAddUser(newObj);
+      handleAddUser(userId, nameFormated);
       setNewUser("");
     }
   };
 
+  // ввод имени по enter
   const handleChangeNewUser = (code: number) => {
     if (code === 13) {
       handleAddNewUser();

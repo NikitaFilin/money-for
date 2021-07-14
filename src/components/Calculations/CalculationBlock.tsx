@@ -3,11 +3,10 @@ import "../../styles/calculationBlock.css";
 
 import { IUser, IProduct } from "../../types/types";
 import { UserCard } from "../Calculations/UserCard";
-// import { ProductCard } from "../Calculations/ProductCard";
 
 interface ICalculationBlock {
   users: IUser[];
-  products: IProduct[];
+  products: IProduct[] | null;
   handleUserProducts: (id: number, productId: number, index: number) => void;
 }
 
@@ -18,7 +17,6 @@ export const CalculationBlock: React.FC<ICalculationBlock> = ({
 }) => {
   return (
     <div className="calculation-container">
-      {/* <ProductCard products={products} /> */}
       <div className="content-container-wrapper">
         <div className="content-container-users">
           <UserCard

@@ -52,7 +52,7 @@ export const PopUpProducts: React.FC<IPopUpProductsProps> = ({
                   </div>
                 </div>
               </li>
-              {products.map((product: IProduct) => {
+              {products?.map((product: IProduct) => {
                 return (
                   <li key={product.productId}>
                     <div className="popup-userName-line-add">
