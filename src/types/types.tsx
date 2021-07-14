@@ -30,7 +30,7 @@ export interface IMoneyManagerProps {
 }
 
 export interface IPopUpUsersProps {
-  users: IUser[];
+  users: IUser[] | null;
   handleAddUser: (userId: number, nameFormated: string) => void;
   handleRemoveUser: (id: number) => void;
   setPopUpView: (popUpView: boolean) => void;

@@ -13,50 +13,70 @@ import {
 } from "./types/types";
 
 const App = () => {
-  const [users, setUsers] = useState<IUser[]>([]);
-
+  const [users, setUsers] = useState<IUser[] | null>(null);
   const [products, setProducts] = useState<IProduct[] | null>(null);
+  const [moneyManager, setMoneyManager] = useState<IMoneyManager>({});
 
-  const [moneyManager, setMoneyManager] = useState<IMoneyManager>({
-    1626165146992: {
-      cost: 54,
-      userSelected: [1626080975341],
-      personCost: 0,
-    },
-  });
   // открывает/ закрывает PopUp
   const [popUpViewUsers, setPopUpViewUsers] = useState<boolean>(false);
   const [popUpViewProducts, setPopUpViewProducts] = useState<boolean>(false);
 
   // добавление/удаление нового участника
+  // !
   const handleAddUser = (userId: number, nameFormated: string) => {
-    if (products) {
-      setUsers([
-        ...users,
-        {
-          id: userId,
-          name: nameFormated,
-          checked: true,
-          userProducts: [...products],
-          productSelected: [],
-        },
-      ]);
+    if (users) {
+      if (products) {
+        setUsers([
+          ...users,
+          {
+            id: userId,
+            name: nameFormated,
+            checked: true,
+            userProducts: [...products],
+            productSelected: [],
+          },
+        ]);
+      } else {
+        setUsers([
+          ...users,
+          {
+            id: userId,
+            name: nameFormated,
+            checked: true,
+            userProducts: [],
+            productSelected: [],
+          },
+        ]);
+      }
     } else {
-      setUsers([
-        ...users,
-        {
-          id: userId,
-          name: nameFormated,
-          checked: true,
-          userProducts: [],
-          productSelected: [],
-        },
-      ]);
+      if (products) {
+        setUsers([
+          {
+            id: userId,
+            name: nameFormated,
+            checked: true,
+            userProducts: [...products],
+            productSelected: [],
+          },
+        ]);
+      } else {
+        setUsers([
+          {
+            id: userId,
+            name: nameFormated,
+            checked: true,
+            userProducts: [],
+            productSelected: [],
+          },
+        ]);
+      }
     }
   };
 
   const handleRemoveUser = (id: number) => {
-    setUsers(users.filter((el) => el.id !== id));
+    if (users) {
+      setUsers(users.filter((el) => el.id !== id));
+    }
   };
 
   // добавление/удаление продуктов
@@ -67,20 +87,22 @@ const App = () => {
       setProducts([...products, productObj]);
     }
     //добавление продукта Юзерам
-    setUsers((prev: IUser[]) => {
-      return prev.map((el: IUser) => ({
-        ...el,
-        userProducts: [
-          ...el.userProducts,
-          {
-            productId: productObj.productId,
-            name: productObj.name,
-            price: productObj.price,
-            checked: false,
-          },
-        ],
-      }));
-    });
+    if (users) {
+      setUsers(
+        users.map((el: IUser) => ({
+          ...el,
+          userProducts: [
+            ...el.userProducts,
+            {
+              productId: productObj.productId,
+              name: productObj.name,
+              price: productObj.price,
+              checked: false,
+            },
+          ],
+        }))
+      );
+    }
 
     //Добавляем товар в moneyManager
     const { productId, price } = productObj;
@@ -100,12 +122,16 @@ const App = () => {
       setProducts(products.filter((el) => el.productId !== id));
 
       //удаление продукта у Юзеров
-      setUsers((prev) => {
-        return prev.map((el: IUser) => ({
-          ...el,
-          userProducts: [...el.userProducts.filter((x) => x.productId !== id)],
-        }));
-      });
+      if (users) {
+        setUsers(
+          users.map((el: IUser) => ({
+            ...el,
+            userProducts: [
+              ...el.userProducts.filter((x) => x.productId !== id),
+            ],
+          }))
+        );
+      }
 
       //удаление товара из moneyManager
       setMoneyManager((prev) => {
@@ -117,16 +143,18 @@ const App = () => {
 
   // Выбор участника
   const handleCheckedUser = (id: number) => {
-    setUsers(
-      users.map((user) => {
-        if (user.id !== id) return user;
+    if (users) {
+      setUsers(
+        users.map((user) => {
+          if (user.id !== id) return user;
 
-        return {
-          ...user,
-          checked: !user.checked,
-        };
-      })
-    );
+          return {
+            ...user,
+            checked: !user.checked,
+          };
+        })
+      );
+    }
   };
 
   const handleUserProducts = (
@@ -134,22 +162,24 @@ const App = () => {
     productId: number,
     index: number
   ) => {
-    setUsers(
-      users.map((user) => {
-        if (user.id === userId) {
-          user.userProducts.map((product, i) => {
-            console.log(product, productId);
+    if (users) {
+      setUsers(
+        users.map((user) => {
+          if (user.id === userId) {
+            user.userProducts.map((product, i) => {
+              console.log(product, productId);
 
-            if (index === i) {
-              product.checked = !product.checked;
-            }
-            return product;
-          });
-        }
-        return user;
-      })
-    );
-    moneyManagerCheck(userId, productId);
+              if (index === i) {
+                product.checked = !product.checked;
+              }
+              return product;
+            });
+          }
+          return user;
+        })
+      );
+      moneyManagerCheck(userId, productId);
+    }
   };
 
   // добавляем в товары участников, которые их выбрали
@@ -206,6 +236,7 @@ const App = () => {
         users={users}
         products={products}
         handleUserProducts={handleUserProducts}
+        moneyManager={moneyManager}
       />
     </>
   );

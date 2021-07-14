@@ -42,7 +42,7 @@ export const PopUpUsers: React.FC<IPopUpUsersProps> = ({
     <>
       <div className="b-popup" onClick={(e) => clickOutside(e)}>
         <div className="b-popup-content">
-          {
+          {users ? (
             <ul>
               {users.length > 0 ? (
                 users.map((user: IUser) => {
@@ -89,7 +89,25 @@ export const PopUpUsers: React.FC<IPopUpUsersProps> = ({
                 </button>
               </div>
             </ul>
-          }
+          ) : (
+            <ul>
+              <div className="popup-userName-null">Участников пока нет</div>
+              <div className="popup-userName-line-add">
+                <input
+                  placeholder="Новый участник"
+                  value={newUser}
+                  onChange={(e) => setNewUser(e.target.value)}
+                  onKeyUp={(e) => handleChangeNewUser(e.keyCode)}
+                ></input>
+                <button
+                  className="waves-effect waves-light btn-small pink darken-3"
+                  onClick={() => handleAddNewUser()}
+                >
+                  Добавить
+                </button>
+              </div>
+            </ul>
+          )}
         </div>
       </div>
     </>
