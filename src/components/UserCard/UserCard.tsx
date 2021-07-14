@@ -46,7 +46,7 @@ export const UserCard: React.FC<IUserCard> = ({
                     </div>
                     <div>{product.name}</div>
                     <div>
-                      {moneyManager[product.productId].personCost.toFixed(1)}
+                      {moneyManager[product.productId].personCost.toFixed(0)}
                     </div>
                   </div>
                 );

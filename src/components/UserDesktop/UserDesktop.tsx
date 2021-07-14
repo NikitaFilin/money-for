@@ -1,17 +1,10 @@
 import React from "react";
 import "../../styles/calculationBlock.css";
 
-import { IUser, IProduct, IMoneyManager } from "../../types/types";
-import { UserCard } from "../Calculations/UserCard";
+import { IUserDesktop } from "../../types/types";
+import { UserCard } from "../UserCard/UserCard";
 
-interface ICalculationBlock {
-  users: IUser[] | null;
-  products: IProduct[] | null;
-  moneyManager: IMoneyManager;
-  handleUserProducts: (id: number, productId: number, index: number) => void;
-}
-
-export const CalculationBlock: React.FC<ICalculationBlock> = ({
+export const UserDesktop: React.FC<IUserDesktop> = ({
   users,
   products,
   moneyManager,

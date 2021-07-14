@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { NavBar } from "./components/NavBar";
+import { NavBar } from "./components/NavBar/NavBar";
 import { PopUpUsers } from "./components/PopUps/PopUpUsers";
 import { PopUpProducts } from "./components/PopUps/PopUpProducts";
-import { CalculationBlock } from "./components/Calculations/CalculationBlock";
+import { UserDesktop } from "./components/UserDesktop/UserDesktop";
 import "./index.css";
 
 import {
@@ -181,7 +181,6 @@ const App = () => {
       moneyManagerCheck(userId, productId);
     }
   };
-
   // добавляем в товары участников, которые их выбрали
   // считаем Персональную сумму товара
   const moneyManagerCheck = (userId: number, productId: number): void => {
@@ -232,7 +231,7 @@ const App = () => {
           setPopUpViewProducts={setPopUpViewProducts}
         />
       ) : null}
-      <CalculationBlock
+      <UserDesktop
         users={users}
         products={products}
         handleUserProducts={handleUserProducts}
