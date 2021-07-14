@@ -1,3 +1,10 @@
+export interface INavBar {
+  popUpViewUsers: boolean;
+  setPopUpViewUsers: (popUpViewUsers: boolean) => void;
+  popUpViewProducts: boolean;
+  setPopUpViewProducts: (popUpViewProducts: boolean) => void;
+}
+
 export interface IUser {
   id: number;
   name: string;
@@ -17,6 +24,13 @@ export interface IProduct {
   price: number;
   checked: boolean;
   userSelected: string[];
+}
+
+export interface IUserDesktop {
+  users: IUser[] | null;
+  products: IProduct[] | null;
+  moneyManager: IMoneyManager;
+  handleUserProducts: (id: number, productId: number, index: number) => void;
 }
 
 export interface IMoneyManager {
@@ -48,8 +62,3 @@ export interface IMoneyCount {
   users?: IUser[];
   products?: IProduct[];
 }
-
-// let moneyState = [
-//   { Никита: [{ хлеб: 1 }, { молоко: 0 }] },
-//   { Олег: [{ молоко: 1 }] },
-// ];
