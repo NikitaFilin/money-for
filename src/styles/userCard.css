@@ -9,8 +9,7 @@
   padding: 5px;
   border-radius: 10px;
   border: 1px solid white;
-  /* background-color: rgb(173, 20, 87); */
-  background-color: rgb(220, 20, 122);
+  background-color: rgb(173, 20, 87);
   color: white;
 }
 .user-card-container-header {

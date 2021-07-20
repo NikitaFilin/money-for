@@ -10,7 +10,7 @@ export interface IUser {
   name: string;
   checked: boolean;
   userProducts: IUserProducts[];
-  productSelected: string[];
+  totalCosts: IUserProductsTotalCosts[];
 }
 export interface IUserProducts {
   productId: number;
@@ -18,6 +18,12 @@ export interface IUserProducts {
   price: number;
   checked: boolean;
 }
+
+export interface IUserProductsTotalCosts {
+  productIdCost: number;
+  totalCosts: number;
+}
+
 export interface IProduct {
   productId: number;
   name: string;
@@ -28,19 +34,19 @@ export interface IProduct {
 
 export interface IUserDesktop {
   users: IUser[] | null;
-  products: IProduct[] | null;
   moneyManager: IMoneyManager;
   handleUserProducts: (id: number, productId: number, index: number) => void;
 }
 
 export interface IMoneyManager {
-  [id: number]: IMoneyManagerProps;
+  [productId: number]: IMoneyManagerProps;
 }
 
 export interface IMoneyManagerProps {
   cost: number;
   userSelected: number[];
   personCost: number;
+  // [userId: number]: number[];
 }
 
 export interface IPopUpUsersProps {

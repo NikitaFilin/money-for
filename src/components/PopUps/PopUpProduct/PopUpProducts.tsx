@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "../../index.css";
+import "../../../index.css";
 
-import { IPopUpProductsProps, IProduct } from "../../types/types";
+import { IPopUpProductsProps, IProduct } from "../../../types/types";
 
 export const PopUpProducts: React.FC<IPopUpProductsProps> = ({
   products,

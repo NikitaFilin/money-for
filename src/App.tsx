@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavBar } from "./components/NavBar/NavBar";
-import { PopUpUsers } from "./components/PopUps/PopUpUsers";
-import { PopUpProducts } from "./components/PopUps/PopUpProducts";
+import { PopUpUsers } from "./components/PopUps/PopUpUser/PopUpUsers";
+import { PopUpProducts } from "./components/PopUps/PopUpProduct/PopUpProducts";
 import { UserDesktop } from "./components/UserDesktop/UserDesktop";
 import "./index.css";
 
@@ -33,7 +33,7 @@ const App = () => {
             name: nameFormated,
             checked: true,
             userProducts: [...products],
-            productSelected: [],
+            totalCosts: [],
           },
         ]);
       } else {
@@ -44,7 +44,7 @@ const App = () => {
             name: nameFormated,
             checked: true,
             userProducts: [],
-            productSelected: [],
+            totalCosts: [],
           },
         ]);
       }
@@ -56,7 +56,7 @@ const App = () => {
             name: nameFormated,
             checked: true,
             userProducts: [...products],
-            productSelected: [],
+            totalCosts: [],
           },
         ]);
       } else {
@@ -66,7 +66,7 @@ const App = () => {
             name: nameFormated,
             checked: true,
             userProducts: [],
-            productSelected: [],
+            totalCosts: [],
           },
         ]);
       }
@@ -167,8 +167,6 @@ const App = () => {
         users.map((user) => {
           if (user.id === userId) {
             user.userProducts.map((product, i) => {
-              console.log(product, productId);
-
               if (index === i) {
                 product.checked = !product.checked;
               }
@@ -185,6 +183,9 @@ const App = () => {
   // считаем Персональную сумму товара
   const moneyManagerCheck = (userId: number, productId: number): void => {
     let someProperty = { ...moneyManager };
+
+    // console.log(someProperty, someProperty);
+
     if (
       someProperty[productId] &&
       someProperty[productId].userSelected.includes(userId)
@@ -205,6 +206,34 @@ const App = () => {
 
     setMoneyManager(someProperty);
   };
+
+  const calculatingUserAmount = (): void => {
+    for (let productId in moneyManager) {
+      // Берём каждый продукт из списка
+      const arrUserSelected = moneyManager[productId]; // Массив людей, выбравших товар
+
+      for (let i = 0; i < arrUserSelected.userSelected.length; i++) {
+        users?.forEach((user) => {
+          if (arrUserSelected.userSelected[i] === user.id) {
+            // Если в списке людей, выбравших товар есть наш Юзер, то
+            // мы должны этому юзеру закинуть в totalCosts - personCost из массива moneyManager
+            console.log(
+              "Юзер",
+              user.name,
+              "выбрал товар, его personCost -",
+              arrUserSelected.personCost
+            );
+
+            // user.totalCosts.push( {
+            //   productId :
+            // })
+          }
+        });
+      }
+    }
+  };
+
+  calculatingUserAmount();
 
   return (
     <>
@@ -233,7 +262,6 @@ const App = () => {
       ) : null}
       <UserDesktop
         users={users}
-        products={products}
         handleUserProducts={handleUserProducts}
         moneyManager={moneyManager}
       />

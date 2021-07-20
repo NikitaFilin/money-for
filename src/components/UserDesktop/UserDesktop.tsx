@@ -6,7 +6,6 @@ import { UserCard } from "../UserCard/UserCard";
 
 export const UserDesktop: React.FC<IUserDesktop> = ({
   users,
-  products,
   moneyManager,
   handleUserProducts,
 }) => {
@@ -17,7 +16,6 @@ export const UserDesktop: React.FC<IUserDesktop> = ({
           <div className="content-container-users">
             <UserCard
               users={users}
-              products={products}
               moneyManager={moneyManager}
               handleUserProducts={handleUserProducts}
             />

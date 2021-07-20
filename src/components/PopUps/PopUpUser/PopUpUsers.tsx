@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "../../index.css";
+import "../../../index.css";
 
-import { IUser, IPopUpUsersProps } from "../../types/types";
+import { IUser, IPopUpUsersProps } from "../../../types/types";
 
 export const PopUpUsers: React.FC<IPopUpUsersProps> = ({
   users,

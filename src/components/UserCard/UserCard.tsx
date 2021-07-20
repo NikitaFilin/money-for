@@ -1,30 +1,19 @@
 import React from "react";
-
-import { IUser, IProduct, IMoneyManager } from "../../types/types";
+import { IUser, IMoneyManager } from "../../types/types";
 
 import "../../styles/userCard.css";
 
 interface IUserCard {
   users: IUser[];
-  products: IProduct[] | null;
   moneyManager: IMoneyManager;
   handleUserProducts: (id: number, productId: number, index: number) => void;
 }
 
 export const UserCard: React.FC<IUserCard> = ({
   users,
-  products,
   moneyManager,
   handleUserProducts,
 }) => {
-  // {
-  //   1626270507409: {
-  //     cost: 200
-  //     personCost: 200
-  //     userSelected: [1626270492597]
-  //   }
-  // }
-
   return (
     <>
       {users.map((user: IUser) => {
