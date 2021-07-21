@@ -8,7 +8,6 @@ export const PopUpUsers: React.FC<IPopUpUsersProps> = ({
   handleAddUser,
   handleRemoveUser,
   setPopUpView,
-  handleCheckedUser,
 }) => {
   const [newUser, setNewUser] = useState("");
 
@@ -49,13 +48,7 @@ export const PopUpUsers: React.FC<IPopUpUsersProps> = ({
                   return (
                     <li key={user.id}>
                       <div className="popup-userName-line">
-                        <div className="popup-userName-line-icons">
-                          <input
-                            type="checkbox"
-                            checked={user.checked}
-                            onChange={() => handleCheckedUser(user.id)}
-                          />
-                        </div>
+                        <div className="popup-userName-line-icons"></div>
                         <div className="popup-userName-line-userName">
                           {user.name}
                         </div>

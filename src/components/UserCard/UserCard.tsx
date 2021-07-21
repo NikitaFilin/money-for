@@ -1,42 +1,57 @@
-import React from "react";
-import { IUser, IMoneyManager } from "../../types/types";
+import React, { useEffect } from "react";
+import { IUser, IUserCard } from "../../types/types";
+
+import { Checkbox } from "../UserCard/Checkbox/Checkbox";
 
 import "../../styles/userCard.css";
 
-interface IUserCard {
-  users: IUser[];
-  moneyManager: IMoneyManager;
-  handleUserProducts: (id: number, productId: number, index: number) => void;
-}
-
 export const UserCard: React.FC<IUserCard> = ({
   users,
-  moneyManager,
+  products,
   handleUserProducts,
+  setProducts,
 }) => {
+  console.log("UserCard", products);
+
+  // useEffect(() => {
+  //   console.log("useEffect");
+  //   // let someProducts = [...products];
+  //   // console.log("someProducts", someProducts, "and", products);
+  //   if (products) {
+  //     const result = products.map((product) => {
+  //       return {
+  //         ...product,
+  //         personCost: Number(
+  //           (product.price / product.userSelected.length).toFixed()
+  //         ),
+  //       };
+  //     });
+  //     console.log("result", result, products);
+
+  //     // return products;
+  //     setProducts(result);
+  //   }
+  // }, []);
+
   return (
     <>
       {users.map((user: IUser) => {
-        return user.checked ? (
+        return (
           <div className="user-card-container" key={user.id}>
             <span className="user-card-container-header">{user.name}</span>
             <div className="user-card-line">
-              {user.userProducts?.map((product, index) => {
+              {products?.map((product) => {
                 return (
                   <div className="user-card" key={product.productId}>
-                    <div>
-                      <input
-                        type="checkbox"
-                        checked={user.userProducts[index].checked}
-                        onChange={() =>
-                          handleUserProducts(user.id, product.productId, index)
-                        }
-                      />
-                    </div>
-                    <div>{product.name}</div>
-                    <div>
-                      {moneyManager[product.productId].personCost.toFixed(0)}
-                    </div>
+                    <Checkbox
+                      userId={user.id}
+                      productId={product.productId}
+                      handleUserProducts={handleUserProducts}
+                      productName={product.name}
+                      personCost={product.personCost}
+                      products={products}
+                      setProducts={setProducts}
+                    />
                   </div>
                 );
               })}
@@ -47,7 +62,7 @@ export const UserCard: React.FC<IUserCard> = ({
               {/* Итого: {user.productSelected?.reduce((acc, el) => (acc += el), 0)} */}
             </span>
           </div>
-        ) : null;
+        );
       })}
     </>
   );

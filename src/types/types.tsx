@@ -8,45 +8,44 @@ export interface INavBar {
 export interface IUser {
   id: number;
   name: string;
-  checked: boolean;
-  userProducts: IUserProducts[];
-  totalCosts: IUserProductsTotalCosts[];
-}
-export interface IUserProducts {
-  productId: number;
-  name: string;
-  price: number;
-  checked: boolean;
-}
-
-export interface IUserProductsTotalCosts {
-  productIdCost: number;
-  totalCosts: number;
+  totalCosts: {
+    [productId: number]: number;
+  };
 }
 
 export interface IProduct {
   productId: number;
   name: string;
   price: number;
-  checked: boolean;
-  userSelected: string[];
+  personCost: number;
+  checked: {
+    [userCheckedId: number]: boolean;
+  };
+  userSelected: number[];
 }
 
 export interface IUserDesktop {
   users: IUser[] | null;
-  moneyManager: IMoneyManager;
-  handleUserProducts: (id: number, productId: number, index: number) => void;
+  products: IProduct[] | null;
+  handleUserProducts: (
+    id: number,
+    productId: number,
+    status: boolean,
+    index?: number
+  ) => void;
+  setProducts: (prev: any) => void | null;
 }
 
-export interface IMoneyManager {
-  [productId: number]: IMoneyManagerProps;
-}
-
-export interface IMoneyManagerProps {
-  cost: number;
-  userSelected: number[];
-  personCost: number;
-  // [userId: number]: number[];
+export interface IUserCard {
+  users: IUser[];
+  products: IProduct[] | null;
+  handleUserProducts: (
+    id: number,
+    productId: number,
+    status: boolean,
+    index?: number
+  ) => void;
+  setProducts: (prev: any) => void | null;
 }
 
 export interface IPopUpUsersProps {
@@ -54,7 +53,6 @@ export interface IPopUpUsersProps {
   handleAddUser: (userId: number, nameFormated: string) => void;
   handleRemoveUser: (id: number) => void;
   setPopUpView: (popUpView: boolean) => void;
-  handleCheckedUser: (props: any) => void;
 }
 
 export interface IPopUpProductsProps {
@@ -67,4 +65,15 @@ export interface IPopUpProductsProps {
 export interface IMoneyCount {
   users?: IUser[];
   products?: IProduct[];
+}
+
+export interface ICheckbox {
+  userId: number;
+  productId: number;
+  productName: string;
+  personCost: number;
+
+  products: IProduct[] | null;
+  setProducts: (prev: any) => void | null;
+  handleUserProducts: (id: number, productId: number, status: boolean) => void;
 }

@@ -27,7 +27,8 @@ export const PopUpProducts: React.FC<IPopUpProductsProps> = ({
         productId: Date.now(),
         name: styledProduct,
         price: newPrice,
-        checked: false,
+        personCost: 0,
+        checked: {},
         userSelected: [],
       };
 

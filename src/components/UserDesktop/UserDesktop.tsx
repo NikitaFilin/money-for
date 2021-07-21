@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../styles/calculationBlock.css";
 
 import { IUserDesktop } from "../../types/types";
@@ -6,8 +6,9 @@ import { UserCard } from "../UserCard/UserCard";
 
 export const UserDesktop: React.FC<IUserDesktop> = ({
   users,
-  moneyManager,
+  products,
   handleUserProducts,
+  setProducts,
 }) => {
   return (
     <div className="calculation-container">
@@ -16,8 +17,9 @@ export const UserDesktop: React.FC<IUserDesktop> = ({
           <div className="content-container-users">
             <UserCard
               users={users}
-              moneyManager={moneyManager}
+              products={products}
               handleUserProducts={handleUserProducts}
+              setProducts={setProducts}
             />
           </div>
         ) : null}

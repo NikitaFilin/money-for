@@ -1,6 +1,6 @@
 .user-card-container {
   min-height: 200px;
-  min-width: 100px;
+  min-width: 140px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,6 +39,7 @@
 }
 .user-card div {
   margin: 0px 5px;
+  width: 50%;
 }
 
 [type="checkbox"]:not(:checked),
@@ -82,4 +83,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 5px;
+}
+
+.checkbox-userCard-price {
+  text-align: end;
 }
