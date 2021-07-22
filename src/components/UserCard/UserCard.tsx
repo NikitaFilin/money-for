@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { IUser, IUserCard } from "../../types/types";
-
 import { Checkbox } from "../UserCard/Checkbox/Checkbox";
 
 import "../../styles/userCard.css";
@@ -11,39 +10,18 @@ export const UserCard: React.FC<IUserCard> = ({
   handleUserProducts,
   setProducts,
 }) => {
-  console.log("UserCard", products);
-
-  // useEffect(() => {
-  //   console.log("useEffect");
-  //   // let someProducts = [...products];
-  //   // console.log("someProducts", someProducts, "and", products);
-  //   if (products) {
-  //     const result = products.map((product) => {
-  //       return {
-  //         ...product,
-  //         personCost: Number(
-  //           (product.price / product.userSelected.length).toFixed()
-  //         ),
-  //       };
-  //     });
-  //     console.log("result", result, products);
-
-  //     // return products;
-  //     setProducts(result);
-  //   }
-  // }, []);
-
   return (
     <>
-      {users.map((user: IUser) => {
+      {users?.map((user: IUser) => {
         return (
           <div className="user-card-container" key={user.id}>
             <span className="user-card-container-header">{user.name}</span>
             <div className="user-card-line">
               {products?.map((product) => {
                 return (
-                  <div className="user-card" key={product.productId}>
+                  <div className="user-card">
                     <Checkbox
+                      key={product.productId}
                       userId={user.id}
                       productId={product.productId}
                       handleUserProducts={handleUserProducts}
@@ -58,8 +36,13 @@ export const UserCard: React.FC<IUserCard> = ({
             </div>
 
             <span className="user-card-container-footer">
-              Итого {}
-              {/* Итого: {user.productSelected?.reduce((acc, el) => (acc += el), 0)} */}
+              Итого:
+              {products?.reduce((acc, el) => {
+                if (el.userSelected.includes(Number(user?.id))) {
+                  acc += Number(el.personCost);
+                }
+                return acc;
+              }, 0)}
             </span>
           </div>
         );

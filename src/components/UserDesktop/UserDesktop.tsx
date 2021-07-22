@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import "../../styles/calculationBlock.css";
-
+import React from "react";
 import { IUserDesktop } from "../../types/types";
 import { UserCard } from "../UserCard/UserCard";
+
+import "../../styles/calculationBlock.css";
 
 export const UserDesktop: React.FC<IUserDesktop> = ({
   users,

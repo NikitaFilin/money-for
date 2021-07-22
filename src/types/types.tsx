@@ -8,9 +8,6 @@ export interface INavBar {
 export interface IUser {
   id: number;
   name: string;
-  totalCosts: {
-    [productId: number]: number;
-  };
 }
 
 export interface IProduct {
@@ -62,9 +59,11 @@ export interface IPopUpProductsProps {
   setPopUpViewProducts: (popUpViewProducts: boolean) => void;
 }
 
-export interface IMoneyCount {
-  users?: IUser[];
-  products?: IProduct[];
+export interface IFooter {
+  users: IUser[] | null;
+  user: IUser | null;
+  products: IProduct[] | null;
+  setUsers: (prev: any) => void | null;
 }
 
 export interface ICheckbox {

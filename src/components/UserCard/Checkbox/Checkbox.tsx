@@ -1,33 +1,35 @@
 import React, { useEffect, useState } from "react";
-
 import { ICheckbox } from "../../../types/types";
+
 import "../../../styles/userCard.css";
 
 export const Checkbox: React.FC<ICheckbox> = ({
-  userId,
-  productId,
-  handleUserProducts,
-  productName,
-  personCost,
   products,
   setProducts,
+  userId,
+  productId,
+  productName,
+  personCost,
+  handleUserProducts,
 }) => {
   const [selected, setSelected] = useState(false);
 
   useEffect(() => {
     // Рассчитываем Персональную сумму товара
-    console.log("useEffect");
     if (products) {
-      const result = products.map((product) => {
+      const resultPersonCost = products.map((product) => {
+        let cost =
+          product.userSelected.length > 1
+            ? Number((product.price / product.userSelected.length).toFixed())
+            : product.price;
+
         return {
           ...product,
-          personCost: Number(
-            (product.price / product.userSelected.length).toFixed()
-          ),
+          personCost: cost,
         };
       });
 
-      setProducts(result);
+      setProducts(resultPersonCost);
     }
   }, [selected]);
 

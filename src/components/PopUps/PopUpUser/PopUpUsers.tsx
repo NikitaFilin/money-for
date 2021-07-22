@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import "../../../index.css";
-
 import { IUser, IPopUpUsersProps } from "../../../types/types";
+import "../../../index.css";
 
 export const PopUpUsers: React.FC<IPopUpUsersProps> = ({
   users,
@@ -22,8 +21,8 @@ export const PopUpUsers: React.FC<IPopUpUsersProps> = ({
       setNewUser(newUser.trim());
 
       const userId = Date.now();
-      const nameFormated =
-        newUser[0].toUpperCase() + newUser.toLowerCase().slice(1);
+      newUser.toLowerCase();
+      const nameFormated = newUser[0].toUpperCase() + newUser.slice(1);
 
       handleAddUser(userId, nameFormated);
       setNewUser("");

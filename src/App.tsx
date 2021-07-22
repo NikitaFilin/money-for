@@ -1,39 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { NavBar } from "./components/NavBar/NavBar";
 import { PopUpUsers } from "./components/PopUps/PopUpUser/PopUpUsers";
 import { PopUpProducts } from "./components/PopUps/PopUpProduct/PopUpProducts";
 import { UserDesktop } from "./components/UserDesktop/UserDesktop";
-import "./index.css";
 
 import { IUser, IProduct } from "./types/types";
 
-//////////////////// user
-// id: 1626770267035
-// name:"Vd"
-// totalCosts:  // товары которые он выбрал
-//   {
-//     "12"{productId} : 80{personCost}
-//   },
-//   {
-//     "2" : 2000
-//   }
-// ]
-
-//////////////////// product;
-// [
-//  {
-//   productId: 1626770276272;
-//   name: "Хлеб";
-//   price: 20;
-//   personCost: 0
-//   checked:
-//   {
-//     userCheckedId : true,
-//     userCheckedId : false,
-//   };
-//   userSelected: [1626770276272, 1626770276272];
-//  }
-// ]
+import "./index.css";
 
 const App = () => {
   const [users, setUsers] = useState<IUser[] | null>(null);
@@ -51,7 +24,6 @@ const App = () => {
         {
           id: userId,
           name: nameFormated,
-          totalCosts: [],
         },
       ]);
     } else {
@@ -59,7 +31,6 @@ const App = () => {
         {
           id: userId,
           name: nameFormated,
-          totalCosts: [],
         },
       ]);
     }
@@ -85,6 +56,7 @@ const App = () => {
     }
   };
 
+  // Добавляем/удаляем в products Юзеров, выбравших товар
   const handleUserProducts = (
     userId: number,
     productId: number,
@@ -106,34 +78,6 @@ const App = () => {
       );
     }
   };
-
-  // добавляем в товары участников, которые их выбрали
-  // считаем Персональную сумму товара
-  // const moneyManagerCheck = (userId: number, productId: number): void => {
-  //   let someProperty = { ...moneyManager };
-
-  //   // console.log(someProperty, someProperty);
-
-  //   if (
-  //     someProperty[productId] &&
-  //     someProperty[productId].userSelected.includes(userId)
-  //   ) {
-  //     someProperty[productId].userSelected = someProperty[
-  //       productId
-  //     ].userSelected.filter((el) => el !== userId);
-  //   } else {
-  //     someProperty[productId].userSelected.push(userId);
-  //   }
-  //   someProperty[productId].personCost =
-  //     someProperty[productId].cost /
-  //     someProperty[productId].userSelected.length;
-
-  //   if (someProperty[productId].personCost === Infinity) {
-  //     someProperty[productId].personCost = 0;
-  //   }
-
-  //   setMoneyManager(someProperty);
-  // };
 
   return (
     <>
