@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import "../../index.css";
+import { IPopUpProductsProps, IProduct } from "../../../types/types";
+import "../../../index.css";
 
-export const PopUpProducts: React.FC<any> = ({
+export const PopUpProducts: React.FC<IPopUpProductsProps> = ({
   products,
   handleAddProduct,
   handleRemoveProduct,
@@ -21,11 +22,15 @@ export const PopUpProducts: React.FC<any> = ({
       setNewProduct(newProduct.trim());
       const styledProduct = newProduct[0].toUpperCase() + newProduct.slice(1);
 
-      const newObj = {
-        id: Date.now(),
+      const newObj: IProduct = {
+        productId: Date.now(),
         name: styledProduct,
         price: newPrice,
+        personCost: 0,
+        checked: {},
+        userSelected: [],
       };
+
       handleAddProduct(newObj);
       setNewProduct("");
       setNewPrice(0);
@@ -47,9 +52,9 @@ export const PopUpProducts: React.FC<any> = ({
                   </div>
                 </div>
               </li>
-              {products.map((product: any) => {
+              {products?.map((product: IProduct) => {
                 return (
-                  <li key={product.id}>
+                  <li key={product.productId}>
                     <div className="popup-userName-line-add">
                       <div className="popup-product-Addline-name">
                         {product.name}
@@ -60,7 +65,7 @@ export const PopUpProducts: React.FC<any> = ({
                       <div className="product-line">
                         <i
                           className="material-icons right"
-                          onClick={() => handleRemoveProduct(product.id)}
+                          onClick={() => handleRemoveProduct(product.productId)}
                         >
                           delete_forever
                         </i>

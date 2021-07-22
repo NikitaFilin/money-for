@@ -1,0 +1,24 @@
+.calculation-container {
+  width: 99%;
+  height: 70vh;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+
+  padding: 30px 0px;
+  margin: 0px auto;
+}
+
+.content-container-wrapper {
+  width: 80%;
+  height: 100%;
+}
+
+.content-container-users {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}

@@ -1,72 +1,87 @@
 import React, { useState } from "react";
-import { NavBar } from "./components/NavBar";
-import { PopUpUsers } from "./components/PopUps/PopUpUsers";
-import { PopUpProducts } from "./components/PopUps/PopUpProducts";
+import { NavBar } from "./components/NavBar/NavBar";
+import { PopUpUsers } from "./components/PopUps/PopUpUser/PopUpUsers";
+import { PopUpProducts } from "./components/PopUps/PopUpProduct/PopUpProducts";
+import { UserDesktop } from "./components/UserDesktop/UserDesktop";
+
+import { IUser, IProduct } from "./types/types";
+
 import "./index.css";
 
-type IUserProps = {
-  id: number;
-  name: string;
-  checked: boolean;
-};
-type IProductsProps = {
-  id: number;
-  name: string;
-  price: number;
-};
-
 const App = () => {
-  const [users, setUsers] = useState<Array<IUserProps>>([
-    { id: 1, name: "Никита", checked: true },
-    { id: 2, name: "Олег", checked: false },
-    { id: 3, name: "Алина", checked: true },
-  ]);
-
-  const [products, setProducts] = useState<Array<IProductsProps>>([
-    {
-      id: 1,
-      name: "Хлеб",
-      price: 54,
-    },
-    {
-      id: 2,
-      name: "Молоко",
-      price: 69,
-    },
-    {
-      id: 3,
-      name: "Яйца",
-      price: 70,
-    },
-  ]);
+  const [users, setUsers] = useState<IUser[] | null>(null);
+  const [products, setProducts] = useState<IProduct[] | null>(null);
 
   // открывает/ закрывает PopUp
   const [popUpViewUsers, setPopUpViewUsers] = useState<boolean>(false);
   const [popUpViewProducts, setPopUpViewProducts] = useState<boolean>(false);
 
-  // добавление нового участника
-  const handleAddUser = (userObj: IUserProps) => {
-    setUsers([...users, userObj]);
+  // Добавление/удаление участников
+  const handleAddUser = (userId: number, nameFormated: string) => {
+    if (users) {
+      setUsers([
+        ...users,
+        {
+          id: userId,
+          name: nameFormated,
+        },
+      ]);
+    } else {
+      setUsers([
+        {
+          id: userId,
+          name: nameFormated,
+        },
+      ]);
+    }
   };
-
   const handleRemoveUser = (id: number) => {
-    setUsers(users.filter((el) => el.id !== id));
-  };
-  // добавление продуктов
-  const handleAddProduct = (productObj: IProductsProps) => {
-    console.log("handleAddProduct");
-
-    setProducts([...products, productObj]);
+    if (users) {
+      setUsers(users.filter((el) => el.id !== id));
+    }
   };
 
+  // добавление/удаление продуктов
+  const handleAddProduct = (productObj: IProduct) => {
+    if (!products) {
+      setProducts([productObj]);
+    } else {
+      setProducts([...products, productObj]);
+    }
+    //добавление продукта Юзерам
+  };
   const handleRemoveProduct = (id: number) => {
-    setProducts(products.filter((el) => el.id !== id));
+    if (products) {
+      setProducts(products.filter((el) => el.productId !== id));
+    }
+  };
+
+  // Добавляем/удаляем в products Юзеров, выбравших товар
+  const handleUserProducts = (
+    userId: number,
+    productId: number,
+    status: boolean
+  ) => {
+    if (products) {
+      setProducts(
+        products.map((product) => {
+          if (product.productId === productId) {
+            return {
+              ...product,
+              userSelected: status
+                ? product.userSelected.concat([userId])
+                : product.userSelected.filter((el) => el !== userId),
+            };
+          }
+          return product;
+        })
+      );
+    }
   };
 
   return (
     <>
       <NavBar
-        handleAdd={handleAddUser}
         popUpViewUsers={popUpViewUsers}
         setPopUpViewUsers={setPopUpViewUsers}
         popUpViewProducts={popUpViewProducts}
@@ -88,8 +103,13 @@ const App = () => {
           setPopUpViewProducts={setPopUpViewProducts}
         />
       ) : null}
+      <UserDesktop
+        users={users}
+        products={products}
+        setProducts={setProducts}
+        handleUserProducts={handleUserProducts}
+      />
     </>
   );
 };
-
 export default App;
