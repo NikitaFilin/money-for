@@ -1,5 +1,6 @@
 import React from "react";
 import { INavBar } from "../../types/types";
+import "../NavBar/NavBar.css";
 
 export const NavBar: React.FC<INavBar> = ({
   popUpViewUsers,
@@ -10,7 +11,7 @@ export const NavBar: React.FC<INavBar> = ({
   return (
     <nav>
       <div className="nav-wrapper pink darken-3 cursor">
-        <div className="navBar-container">
+        <div className="navBar-container-media navBar-container">
           <div
             className="navBar-container-icon"
             onClick={() => setPopUpViewUsers(!popUpViewUsers)}

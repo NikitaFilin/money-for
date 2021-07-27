@@ -19,9 +19,8 @@ export const UserCard: React.FC<IUserCard> = ({
             <div className="user-card-line">
               {products?.map((product) => {
                 return (
-                  <div className="user-card">
+                  <div className="user-card" key={product.productId}>
                     <Checkbox
-                      key={product.productId}
                       userId={user.id}
                       productId={product.productId}
                       handleUserProducts={handleUserProducts}
@@ -36,13 +35,14 @@ export const UserCard: React.FC<IUserCard> = ({
             </div>
 
             <span className="user-card-container-footer">
-              Итого:
+              <span>Итого: </span>
               {products?.reduce((acc, el) => {
                 if (el.userSelected.includes(Number(user?.id))) {
                   acc += Number(el.personCost);
                 }
                 return acc;
-              }, 0)}
+              }, 0)}{" "}
+              &#8381;
             </span>
           </div>
         );

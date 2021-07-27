@@ -99,6 +99,15 @@ export const PopUpProducts: React.FC<IPopUpProductsProps> = ({
                   Добавить
                 </button>
               </div>
+              {products ? (
+                <li className="popup-product-totalCost">
+                  Итого{" "}
+                  {products?.reduce(
+                    (acc: number, el) => (acc += Number(el.price)),
+                    0
+                  )}
+                </li>
+              ) : null}
             </ul>
           }
         </div>
