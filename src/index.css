@@ -62,6 +62,12 @@
   box-shadow: 0px 0px 10px #000;
 }
 
+.b-popup-content {
+  max-height: 350px;
+  overflow: auto;
+  padding: 5px;
+}
+
 /* PopUp - User */
 .popup-userName-null {
   display: flex;
@@ -133,4 +139,10 @@ i {
 
 .popup-userName-Addline-add input {
   text-align: center;
+}
+
+.popup-product-totalCost {
+  text-align: end;
+  padding: 15px 20px 0px;
+  font-size: 20px;
 }

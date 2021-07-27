@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ICheckbox } from "../../../types/types";
 
-import "../../../styles/userCard.css";
+import "../Checkbox/Checkbox.css";
 
 export const Checkbox: React.FC<ICheckbox> = ({
   products,
@@ -45,9 +45,9 @@ export const Checkbox: React.FC<ICheckbox> = ({
       />
       <div>{productName}</div>
       {selected ? (
-        <div className="checkbox-userCard-price">{personCost}</div>
+        <div className="checkbox-price">{personCost}</div>
       ) : (
-        <div className="checkbox-userCard-price"></div>
+        <div className="checkbox-price"></div>
       )}
     </>
   );
