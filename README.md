@@ -1,1 +1,3 @@
-# MoneyFor
+---
+permalink: /index.html
+---
