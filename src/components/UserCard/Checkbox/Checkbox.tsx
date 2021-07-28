@@ -45,7 +45,11 @@ export const Checkbox: React.FC<ICheckbox> = ({
       />
       <div>{productName}</div>
       {selected ? (
-        <div className="checkbox-price">{personCost}</div>
+        personCost !== Infinity ? (
+          <div className="checkbox-price">{personCost}</div>
+        ) : (
+          <div className="checkbox-price">0</div>
+        )
       ) : (
         <div className="checkbox-price"></div>
       )}

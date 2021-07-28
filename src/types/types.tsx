@@ -15,9 +15,6 @@ export interface IProduct {
   name: string;
   price: number;
   personCost: number;
-  checked: {
-    [userCheckedId: number]: boolean;
-  };
   userSelected: number[];
 }
 
