@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { IPopUpProductsProps, IProduct } from "../../../types/types";
 import "../../../index.css";
 
@@ -27,7 +27,6 @@ export const PopUpProducts: React.FC<IPopUpProductsProps> = ({
         name: styledProduct,
         price: newPrice,
         personCost: 0,
-        checked: {},
         userSelected: [],
       };
 
@@ -105,7 +104,8 @@ export const PopUpProducts: React.FC<IPopUpProductsProps> = ({
                   {products?.reduce(
                     (acc: number, el) => (acc += Number(el.price)),
                     0
-                  )}
+                  )}{" "}
+                  &#8381;
                 </li>
               ) : null}
             </ul>

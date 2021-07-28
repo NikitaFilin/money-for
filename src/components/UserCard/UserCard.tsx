@@ -1,6 +1,7 @@
 import React from "react";
 import { IUser, IUserCard } from "../../types/types";
 import { Checkbox } from "../UserCard/Checkbox/Checkbox";
+import { TotalCost } from "../UserCard/TotalCost";
 
 import "../../styles/userCard.css";
 
@@ -34,16 +35,7 @@ export const UserCard: React.FC<IUserCard> = ({
               })}
             </div>
 
-            <span className="user-card-container-footer">
-              <span>Итого: </span>
-              {products?.reduce((acc, el) => {
-                if (el.userSelected.includes(Number(user?.id))) {
-                  acc += Number(el.personCost);
-                }
-                return acc;
-              }, 0)}{" "}
-              &#8381;
-            </span>
+            <TotalCost user={user} products={products} />
           </div>
         );
       })}

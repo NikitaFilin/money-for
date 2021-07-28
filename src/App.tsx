@@ -39,6 +39,19 @@ const App = () => {
     if (users) {
       setUsers(users.filter((el) => el.id !== id));
     }
+    if (products) {
+      setProducts(
+        products.map((product) => {
+          return {
+            ...product,
+            userSelected: product.userSelected.filter(
+              (userId) => userId !== id
+            ),
+            personCost: product.price / (product.userSelected?.length - 1),
+          };
+        })
+      );
+    }
   };
 
   // добавление/удаление продуктов
